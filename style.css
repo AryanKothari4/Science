@@ -11,8 +11,7 @@ body {
     color: #f0f0f0;
     min-height: 100vh;
     padding: 2rem;
-    /* CHANGED: New dark green gradient */
-    background: #0f2724; /* Fallback color */
+    background: #0f2724;
     background: radial-gradient(at top left, #1a4d3c, #1a3a33, #0f2724);
     background-attachment: fixed;
     perspective: 1500px;
@@ -44,8 +43,21 @@ body {
 header h1 {
     font-size: 3rem;
     font-weight: 600;
-    margin-bottom: 2rem;
+    margin-bottom: 1rem; /* Reduced margin to make space for SVG */
     text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.5);
+}
+
+/* --- NEW: SVG Atom Styling --- */
+.atom-container {
+    margin-bottom: 2rem;
+    opacity: 0; /* Initially hidden, JS will fade it in */
+}
+
+#atom path, #atom circle {
+    fill: none;
+    stroke: #66fcf1; /* Teal stroke color to match the glow */
+    stroke-width: 4;
+    stroke-linecap: round;
 }
 
 /* --- The Glassmorphism Card Style --- */
@@ -63,7 +75,6 @@ header h1 {
     transform-style: preserve-3d;
     position: relative;
     overflow: hidden;
-    /* Smoother transition for shadow and transforms */
     transition: box-shadow 0.4s ease, transform 0.4s ease;
 }
 
@@ -77,7 +88,6 @@ header h1 {
     height: 100%;
     background: radial-gradient(
         300px circle at var(--mouse-x, 50%) var(--mouse-y, 50%),
-        /* CHANGED: Reduced opacity from 0.2 to 0.1 for a more subtle glow */
         rgba(102, 252, 241, 0.1),
         transparent 40%
     );
@@ -101,44 +111,30 @@ header h1 {
     font-weight: 300;
 }
 
-
 /* --- Links Section Styling --- */
+.links-container h2 { margin-bottom: 1.5rem; font-weight: 400; }
+.resource-grid { list-style-type: none; display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.5rem; }
+.resource-grid a { display: flex; align-items: center; justify-content: center; height: 100px; background: rgba(255, 255, 255, 0.1); color: #fff; text-decoration: none; padding: 1rem; border-radius: 10px; font-weight: 400; font-size: 1rem; border: 1px solid transparent; box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2); transition: transform 0.3s ease-out, box-shadow 0.3s ease-out; }
+.resource-grid a:hover { transform: translateY(-8px) scale(1.04); box-shadow: 0 12px 35px rgba(0, 0, 0, 0.3); border-color: rgba(255, 255, 255, 0.4); }
 
-.links-container h2 {
-    margin-bottom: 1.5rem;
-    font-weight: 400;
+
+/* --- NEW: Custom Minimalist Scrollbar --- */
+/* This works in WebKit-based browsers (Chrome, Safari, Edge) */
+::-webkit-scrollbar {
+    width: 10px; /* Width of the entire scrollbar */
 }
 
-.resource-grid {
-    list-style-type: none;
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 1.5rem;
+::-webkit-scrollbar-track {
+    background: rgba(15, 39, 36, 0.5); /* Color of the tracking area */
 }
 
-/* --- NEW: Spotlight & Shadow Lift Effect --- */
-.resource-grid a {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    height: 100px;
-    background: rgba(255, 255, 255, 0.1);
-    color: #fff;
-    text-decoration: none;
-    padding: 1rem;
+::-webkit-scrollbar-thumb {
+    background: rgba(102, 252, 241, 0.3); /* The draggable scrolling handle */
     border-radius: 10px;
-    font-weight: 400;
-    font-size: 1rem;
-    border: 1px solid transparent;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-    /* Set up for the lift effect transition */
-    transition: transform 0.3s ease-out, box-shadow 0.3s ease-out;
+    border: 2px solid rgba(15, 39, 36, 0.5);
+    transition: background 0.3s ease;
 }
 
-.resource-grid a:hover {
-    /* The "lift" effect: move up and scale slightly */
-    transform: translateY(-8px) scale(1.04);
-    /* The "shadow" effect: make shadow larger and softer */
-    box-shadow: 0 12px 35px rgba(0, 0, 0, 0.3);
-    border-color: rgba(255, 255, 255, 0.4);
+::-webkit-scrollbar-thumb:hover {
+    background: rgba(102, 252, 241, 0.5); /* Brighter handle on hover */
 }
