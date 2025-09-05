@@ -21,62 +21,56 @@ particlesJS("particles-js", {
 // Wait for the page content to load before running our animations
 document.addEventListener('DOMContentLoaded', () => {
 
-    // --- 2. Main Page Load Animation Sequence ---
-    const pageLoadTimeline = anime.timeline({
-        easing: 'easeOutExpo'
-    });
-    
-    // Animate the main title first
-    pageLoadTimeline.add({
-        targets: 'header.fade-in',
-        opacity: [0, 1],
-        translateY: [30, 0],
-        duration: 800
-    });
+    // --- The Corrected Animation Sequence ---
 
-    // --- 3. NEW: SVG Atom Line Drawing Animation ---
-    const atomContainer = document.querySelector('.atom-container');
+    // Select all the elements that need to fade in
+    const elementsToFade = document.querySelectorAll('.fade-in');
+    
+    // Select the SVG components
     const nucleus = document.querySelector('.atom-nucleus');
     const orbits = document.querySelectorAll('.atom-orbit');
 
-    // Make the atom container visible
-    atomContainer.style.opacity = 1;
-
-    // The magic for the drawing effect: set initial dash offset
+    // FIX: Hide all fade-in elements initially with JS to prevent flashes of content
+    anime.set(elementsToFade, { opacity: 0, translateY: 30 });
+    // FIX: Set the initial state for the SVG drawing animation
+    anime.set(nucleus, { scale: 0 });
     orbits.forEach(path => {
         const length = path.getTotalLength();
         path.style.strokeDasharray = length;
         path.style.strokeDashoffset = length;
     });
 
-    // Add the SVG drawing to the timeline
-    pageLoadTimeline
-        .add({
-            targets: nucleus,
-            scale: [0, 1], // Nucleus pops into existence
-            duration: 500
-        }, '-=300') // Overlap slightly with title animation
-        .add({
-            targets: orbits,
-            strokeDashoffset: [anime.setDashoffset, 0], // Draw the orbits
-            duration: 1000,
-            delay: anime.stagger(200) // Each orbit draws after the other
-        }, '-=500'); // Overlap with nucleus animation
+    // Create a single, clean timeline
+    const pageLoadTimeline = anime.timeline({
+        easing: 'easeOutExpo',
+        duration: 800
+    });
 
-    // --- 4. Animate the Cards After the SVG is Drawn ---
+    // Step 1: Animate the header and the (currently invisible) atom container into view
     pageLoadTimeline.add({
-        targets: '.card.fade-in',
+        targets: '.fade-in', // Targets header, atom-container, and cards
         opacity: [0, 1],
         translateY: [30, 0],
-        duration: 800,
+        delay: anime.stagger(150) // Stagger all elements for a cascade effect
+    })
+    // Step 2: Animate the SVG drawing, overlapping it with the container fading in
+    .add({
+        targets: nucleus,
+        scale: [0, 1],
+        duration: 500
+    }, '-=1000') // The offset starts this animation 1000ms before the previous one ends
+    .add({
+        targets: orbits,
+        strokeDashoffset: [anime.setDashoffset, 0],
+        duration: 1200,
         delay: anime.stagger(200)
-    }, '-=800'); // Start this animation as the orbits are finishing
+    }, '-=800'); // Overlap this as well for a fluid sequence
 
 
-    // --- 5. Magnetic Pull & Snap-Back Effect (for top card) ---
+    // --- Magnetic Pull & Snap-Back Effect (for top card) ---
     const infoCard = document.querySelector('.info-box');
     if (infoCard) {
-        // ... (this logic is unchanged and still works perfectly) ...
+        // ... (This logic remains unchanged as it was working correctly) ...
         infoCard.addEventListener('mousemove', (e) => {
             const { left, top, width, height } = infoCard.getBoundingClientRect();
             const mouseX = e.clientX - left;
