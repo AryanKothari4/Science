@@ -11,26 +11,28 @@
 </head>
 <body>
 
+    <!-- This div is the canvas for our interactive particle background -->
+    <div id="particles-js"></div>
+
     <main class="container">
         
-        <!-- Added a class 'fade-in' to be targeted by our animation -->
         <header class="fade-in">
             <h1>Science Study Hub</h1>
         </header>
 
-        <!-- Added a class 'fade-in' and an id for the mouse-move effect -->
-        <section id="info-card" class="card info-box fade-in">
+        <!-- Added 'tilt-card' class for the JS to target -->
+        <section class="card info-box fade-in tilt-card">
             <h2>Welcome!</h2>
             <p>
                 This is the central hub for all my science class study materials. Here you'll find links to interactive tools, study guides, and quick reference pages for Chemistry, Physics, and more.
             </p>
         </section>
 
-        <!-- Added a class 'fade-in' -->
-        <section class="card links-container fade-in">
+        <!-- Added 'tilt-card' class for the JS to target -->
+        <section class="card links-container fade-in tilt-card">
             <h2>Study Resources</h2>
-            <ul>
-                <!-- Added a class 'link-item' to each list item for animation targeting -->
+            <!-- The list is now a grid -->
+            <ul class="resource-grid">
                 <li class="link-item">
                     <a href="https://aryankothari4.github.io/PeriodicTable/" target="_blank" rel="noopener noreferrer">
                         Interactive Periodic Table
@@ -42,7 +44,8 @@
                 <li class="link-item">
                     <a href="Reflection.html">Optics: Reflection & Mirrors</a>
                 </li>
-                <li class="link-item">
+                <li>
+                    <!-- We'll add the Refraction link here to complete the 2x2 grid -->
                     <a href="Refraction.html">Optics: Refraction & Lenses</a>
                 </li>
             </ul>
@@ -51,9 +54,11 @@
     </main>
     
     <!-- SCRIPT LOADING -->
-    <!-- Load the anime.js library -->
+    <!-- Load the particles.js library FIRST -->
+    <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
+    <!-- Load the anime.js library SECOND -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"></script>
-    <!-- Load our custom script file -->
+    <!-- Load our custom script file LAST -->
     <script src="script.js"></script>
     
 </body>
