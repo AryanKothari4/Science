@@ -1,0 +1,117 @@
+/* --- Basic Setup & Background --- */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    color: #f0f0f0; /* Light text color for contrast against dark background */
+    min-height: 100vh;
+    padding: 2rem;
+
+    /* 
+    This is the "sciency green" background. 
+    A gradient is more dynamic than a solid color. It's a radial gradient that
+    starts with a bright teal in the top-left and fades to a dark sea green.
+    */
+    background: #0f2027;  /* fallback for old browsers */
+    background: -webkit-radial-gradient(top left, #2c5364, #203a43, #0f2027);
+    background: radial-gradient(at top left, #2c5364, #203a43, #0f2027);
+    background-attachment: fixed; /* Keeps the gradient from scrolling with the content */
+}
+
+/* --- Main Content Layout --- */
+
+.container {
+    max-width: 800px;
+    margin: 0 auto; /* Centers the content on the page */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+header h1 {
+    font-size: 3rem;
+    font-weight: 600;
+    margin-bottom: 2rem;
+    text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.5); /* Adds depth to the title */
+}
+
+/* --- The Glassmorphism Card Style --- */
+
+.card {
+    width: 100%;
+    padding: 2.5rem;
+    border-radius: 20px; /* Rounded corners are key for the modern look */
+    margin-bottom: 2rem;
+
+    /* 
+    GLASSMORPHISM EXPLAINED:
+    These next four properties work together to create the "glass" effect.
+    */
+
+    /* 1. Semi-transparent background. We use a light color with low opacity. */
+    background: rgba(255, 255, 255, 0.1);
+
+    /* 2. THE MOST IMPORTANT PART: The backdrop-filter blurs everything BEHIND the element.
+       The high blur value (20px) makes it very noticeable, as you requested.
+       The -webkit- prefix is for Safari browser compatibility. */
+    -webkit-backdrop-filter: blur(20px);
+    backdrop-filter: blur(20px);
+
+    /* 3. A subtle border helps define the edge of the glass pane. */
+    border: 1px solid rgba(255, 255, 255, 0.18);
+
+    /* 4. A box shadow gives the card depth, making it feel like it's floating. */
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+}
+
+.info-box h2 {
+    margin-bottom: 1rem;
+    font-weight: 400;
+}
+
+.info-box p {
+    font-size: 1.1rem;
+    line-height: 1.6;
+    font-weight: 300;
+}
+
+
+/* --- Links Section Styling --- */
+
+.links-container h2 {
+    margin-bottom: 1.5rem;
+    font-weight: 400;
+}
+
+.links-container ul {
+    list-style-type: none; /* Removes the default bullet points */
+    display: flex;
+    flex-direction: column;
+    gap: 1rem; /* Creates space between the link items */
+}
+
+.links-container a {
+    display: block; /* Makes the entire area of the list item clickable */
+    background: rgba(255, 255, 255, 0.15);
+    color: #fff;
+    text-decoration: none;
+    padding: 1rem;
+    border-radius: 10px;
+    font-weight: 400;
+    font-size: 1.1rem;
+    transition: all 0.3s ease; /* Smooth transition for the hover effect */
+    border: 1px solid transparent;
+}
+
+.links-container a:hover {
+    background: rgba(255, 255, 255, 0.3); /* The link brightens on hover */
+    border-color: rgba(255, 255, 255, 0.5); /* Border becomes visible on hover */
+    transform: translateY(-5px); /* The link "lifts up" slightly on hover */
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+}
