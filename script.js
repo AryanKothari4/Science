@@ -1,5 +1,4 @@
 // --- 1. Initialize Interactive Particle Background ---
-// This function comes from the particles.js library loaded in the HTML
 particlesJS("particles-js", {
     particles: {
         number: { value: 80, density: { enable: true, value_area: 800 } },
@@ -12,15 +11,8 @@ particlesJS("particles-js", {
     },
     interactivity: {
         detect_on: "canvas",
-        events: {
-            onhover: { enable: true, mode: "repulse" }, // Pushes particles away from cursor
-            onclick: { enable: true, mode: "push" },    // Pushes particles on click
-            resize: true,
-        },
-        modes: {
-            repulse: { distance: 100, duration: 0.4 },
-            push: { particles_nb: 4 },
-        },
+        events: { onhover: { enable: true, mode: "repulse" }, onclick: { enable: true, mode: "push" }, resize: true },
+        modes: { repulse: { distance: 100, duration: 0.4 }, push: { particles_nb: 4 } },
     },
     retina_detect: true,
 });
@@ -42,37 +34,51 @@ document.addEventListener('DOMContentLoaded', () => {
         delay: anime.stagger(200)
     });
 
-    // --- 3. FIXED: Interactive Card Tilt & NEW: Glow Effect ---
-    const tiltCards = document.querySelectorAll('.tilt-card');
+    // --- 3. NEW: Magnetic Pull & Snap-Back Effect (for top card) ---
+    const infoCard = document.querySelector('.info-box');
 
-    tiltCards.forEach(card => {
-        card.addEventListener('mousemove', (e) => {
-            const { left, top, width, height } = card.getBoundingClientRect();
+    if (infoCard) {
+        infoCard.addEventListener('mousemove', (e) => {
+            const { left, top, width, height } = infoCard.getBoundingClientRect();
             
-            // Calculate mouse position relative to the card center
-            const x = e.clientX - left;
-            const y = e.clientY - top;
+            // Mouse position relative to the card's center
+            const mouseX = e.clientX - left;
+            const mouseY = e.clientY - top;
             const centerX = width / 2;
             const centerY = height / 2;
 
-            // Calculate rotation values. Max rotation is 15 degrees.
-            const rotateX = ((y - centerY) / centerY) * -15;
-            const rotateY = ((x - centerX) / centerX) * 15;
+            // Calculate pull distance (max 12px)
+            const pullX = ((mouseX - centerX) / centerX) * 12;
+            const pullY = ((mouseY - centerY) / centerY) * 12;
 
-            // Apply the 3D tilt transform
-            card.style.transform = `rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale3d(1.05, 1.05, 1.05)`;
-            
+            // Animate the card towards the cursor with anime.js
+            anime({
+                targets: infoCard,
+                translateX: pullX,
+                translateY: pullY,
+                scale: 1.03, // Slightly scale up for effect
+                rotate: '0.01deg', // A trick to keep hardware acceleration on
+                duration: 200, // Make the follow animation quick
+                easing: 'easeOutQuad'
+            });
+
             // Update the CSS variables for the mouse-tracking glow
-            card.style.setProperty('--mouse-x', `${x}px`);
-            card.style.setProperty('--mouse-y', `${y}px`);
+            infoCard.style.setProperty('--mouse-x', `${mouseX}px`);
+            infoCard.style.setProperty('--mouse-y', `${mouseY}px`);
         });
 
-        card.addEventListener('mouseleave', () => {
-            // Reset the card's transform smoothly when the mouse leaves
-            card.style.transform = 'rotateX(0) rotateY(0) scale3d(1, 1, 1)';
+        infoCard.addEventListener('mouseleave', () => {
+            // Animate the card back to its original position with a springy snap
+            anime({
+                targets: infoCard,
+                translateX: 0,
+                translateY: 0,
+                scale: 1,
+                // Using spring physics for a satisfying snap-back
+                // Format: using: 'spring(mass, stiffness, damping, velocity)'
+                duration: 1200,
+                elasticity: 600
+            });
         });
-    });
-
-    // Note: The link hover "jiggle" effect from the previous version has been removed
-    // in favor of the cleaner CSS lift effect, which works better with a grid.
+    }
 });
