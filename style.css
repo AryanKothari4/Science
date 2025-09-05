@@ -43,21 +43,8 @@ body {
 header h1 {
     font-size: 3rem;
     font-weight: 600;
-    margin-bottom: 1rem; /* Reduced margin to make space for SVG */
-    text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.5);
-}
-
-/* --- NEW: SVG Atom Styling --- */
-.atom-container {
     margin-bottom: 2rem;
-    opacity: 0; /* Initially hidden, JS will fade it in */
-}
-
-#atom path, #atom circle {
-    fill: none;
-    stroke: #66fcf1; /* Teal stroke color to match the glow */
-    stroke-width: 4;
-    stroke-linecap: round;
+    text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.5);
 }
 
 /* --- The Glassmorphism Card Style --- */
@@ -67,10 +54,13 @@ header h1 {
     padding: 2.5rem;
     border-radius: 20px;
     margin-bottom: 2rem;
-    background: rgba(255, 255, 255, 0.1);
-    -webkit-backdrop-filter: blur(16px);
-    backdrop-filter: blur(16px);
-    border: 1px solid rgba(255, 255, 255, 0.18);
+    
+    /* CHANGED: Enhanced Glassmorphism */
+    background: rgba(255, 255, 255, 0.15); /* Made slightly more opaque */
+    -webkit-backdrop-filter: blur(22px);  /* Increased blur significantly */
+    backdrop-filter: blur(22px);
+    border: 1px solid rgba(255, 255, 255, 0.25); /* Made border more visible */
+
     box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
     transform-style: preserve-3d;
     position: relative;
@@ -119,22 +109,17 @@ header h1 {
 
 
 /* --- NEW: Custom Minimalist Scrollbar --- */
-/* This works in WebKit-based browsers (Chrome, Safari, Edge) */
 ::-webkit-scrollbar {
-    width: 10px; /* Width of the entire scrollbar */
+    width: 10px;
 }
-
 ::-webkit-scrollbar-track {
-    background: rgba(15, 39, 36, 0.5); /* Color of the tracking area */
+    background: rgba(15, 39, 36, 0.5);
 }
-
 ::-webkit-scrollbar-thumb {
-    background: rgba(102, 252, 241, 0.3); /* The draggable scrolling handle */
+    background: rgba(102, 252, 241, 0.3);
     border-radius: 10px;
     border: 2px solid rgba(15, 39, 36, 0.5);
-    transition: background 0.3s ease;
 }
-
 ::-webkit-scrollbar-thumb:hover {
-    background: rgba(102, 252, 241, 0.5); /* Brighter handle on hover */
+    background: rgba(102, 252, 241, 0.5);
 }
