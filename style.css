@@ -41,7 +41,7 @@ body {
 }
 
 header h1 {
-    font-size: 3rem;
+    font-size: 3.2rem; /* CHANGED from 3rem */
     font-weight: 600;
     margin-bottom: 2rem;
     text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.5);
@@ -54,13 +54,10 @@ header h1 {
     padding: 2.5rem;
     border-radius: 20px;
     margin-bottom: 2rem;
-    
-    /* CHANGED: Enhanced Glassmorphism */
-    background: rgba(255, 255, 255, 0.15); /* Made slightly more opaque */
-    -webkit-backdrop-filter: blur(22px);  /* Increased blur significantly */
+    background: rgba(255, 255, 255, 0.15);
+    -webkit-backdrop-filter: blur(22px);
     backdrop-filter: blur(22px);
-    border: 1px solid rgba(255, 255, 255, 0.25); /* Made border more visible */
-
+    border: 1px solid rgba(255, 255, 255, 0.25);
     box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
     transform-style: preserve-3d;
     position: relative;
@@ -96,30 +93,61 @@ header h1 {
 }
 
 .info-box p {
-    font-size: 1.1rem;
-    line-height: 1.6;
+    font-size: 1.2rem; /* CHANGED from 1.1rem */
+    line-height: 1.7; /* CHANGED for better spacing */
     font-weight: 300;
 }
 
 /* --- Links Section Styling --- */
-.links-container h2 { margin-bottom: 1.5rem; font-weight: 400; }
+.links-container h2 {
+    font-size: 1.5rem; /* CHANGED */
+    margin-bottom: 1.5rem;
+    font-weight: bold;
+}
 .resource-grid { list-style-type: none; display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.5rem; }
-.resource-grid a { display: flex; align-items: center; justify-content: center; height: 100px; background: rgba(255, 255, 255, 0.1); color: #fff; text-decoration: none; padding: 1rem; border-radius: 10px; font-weight: 400; font-size: 1rem; border: 1px solid transparent; box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2); transition: transform 0.3s ease-out, box-shadow 0.3s ease-out; }
+.resource-grid a { display: flex; align-items: center; justify-content: center; height: 100px; background: rgba(255, 255, 255, 0.1); color: #fff; text-decoration: none; padding: 1rem; border-radius: 10px; font-weight: 400; font-size: 1.1rem; /* CHANGED from 1rem */ border: 1px solid transparent; box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2); transition: transform 0.3s ease-out, box-shadow 0.3s ease-out; }
 .resource-grid a:hover { transform: translateY(-8px) scale(1.04); box-shadow: 0 12px 35px rgba(0, 0, 0, 0.3); border-color: rgba(255, 255, 255, 0.4); }
 
+/* --- Feedback Box Styling --- */
+.feedback-box {
+    padding: 2rem;
+}
 
-/* --- NEW: Custom Minimalist Scrollbar --- */
-::-webkit-scrollbar {
-    width: 10px;
+.feedback-box h3 {
+    font-size: 1.4rem; /* CHANGED */
+    font-weight: 600;
+    margin-bottom: 0.75rem;
 }
-::-webkit-scrollbar-track {
-    background: rgba(15, 39, 36, 0.5);
+
+.feedback-box p {
+    font-weight: 300;
+    font-size: 1.1rem; /* CHANGED */
+    max-width: 500px;
+    margin: 0 auto 1.5rem auto;
 }
-::-webkit-scrollbar-thumb {
-    background: rgba(102, 252, 241, 0.3);
-    border-radius: 10px;
-    border: 2px solid rgba(15, 39, 36, 0.5);
+
+.feedback-button {
+    display: inline-block;
+    background: rgba(102, 252, 241, 0.2);
+    border: 1px solid rgba(102, 252, 241, 0.4);
+    color: #fff;
+    padding: 0.75rem 2rem;
+    border-radius: 50px;
+    font-weight: 600;
+    font-size: 1rem; /* CHANGED */
+    text-decoration: none;
+    transition: all 0.3s ease;
 }
-::-webkit-scrollbar-thumb:hover {
-    background: rgba(102, 252, 241, 0.5);
+
+.feedback-button:hover {
+    background: rgba(102, 252, 241, 0.4);
+    transform: translateY(-3px);
+    box-shadow: 0 6px 20px rgba(102, 252, 241, 0.15);
 }
+
+
+/* --- Custom Minimalist Scrollbar --- */
+::-webkit-scrollbar { width: 10px; }
+::-webkit-scrollbar-track { background: rgba(15, 39, 36, 0.5); }
+::-webkit-scrollbar-thumb { background: rgba(102, 252, 241, 0.3); border-radius: 10px; border: 2px solid rgba(15, 39, 36, 0.5); }
+::-webkit-scrollbar-thumb:hover { background: rgba(102, 252, 241, 0.5); }
